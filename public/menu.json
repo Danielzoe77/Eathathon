@@ -1,0 +1,276 @@
+[{
+    "_id": "65757898cf1j789ad",
+    "name": "Afang",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/afang1.jpg",
+    "category" : "soup",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789bd",
+    "name": "Egusi soup",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/egusi.jpeg",
+    "category" : "soup",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789cd",
+    "name": "Pizz Snaadwinch",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/pizz-sandwich.jpg",
+    "category" : "pizza",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789cd",
+    "name": "Pizzar Sandwich",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/pizza-sandwich-feat.webp",
+    "category" : "pizza",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789cd",
+    "name": "nepizzar",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/niger-pizza.jpg",
+    "category" : "pizza",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789wd",
+     "name": "Brown dessert",
+     "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+     "image" :"../src/assets/deserttsbrown.jpg",
+     "category" : "dessert",
+     "price" : 14.7
+   },
+   {
+    "_id": "65757898cf1j789wd",
+     "name": " Dessert Fruits",
+     "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+     "image" :"../src/assets/dessert fruit.jpg",
+     "category" : "dessert",
+     "price" : 14.7
+   },
+{
+    "_id": "65757898cf1j789dd",
+    "name": "neapolitan pizza",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/neapolitan_pizza.jpg",
+    "category" : "pizza",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789ed",
+    "name": "Beckice drinks",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/beckice-drinks.jpg",
+    "category" : "drinks",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789fd",
+    "name": "Fried Rice",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/popularfried-rice.jpg",
+    "category" : "popular",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789gd",
+    "name": "green salad",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/simple-green salad.jpg",
+    "category" : "salad",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789gd",
+    "name": "Classic salad",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/salad.jpg",
+    "category" : "salad",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789gd",
+    "name": "food salad",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/foodar.png",
+    "category" : "salad",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789gd",
+    "name": "Red salad",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/red-salad.jpg",
+    "category" : "salad",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789gd",
+    "name": "Red salad",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/red-salad.jpg",
+    "category" : "salad",
+    "price" : 14.7
+  },
+
+{
+    "_id": "65757898cf1j789hd",
+    "name": "Apple",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+   "image" : "../src/assets/apple.jpg",
+    "category" : "fruit",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789id",
+    "name": "Local salad",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/local-salad.webp",
+    "category" : "salad",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789jd",
+    "name": "Green salad",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/greensalad.jpg",
+    "category" : "pizza",
+    "price" : 14.7
+  },
+
+{
+    "_id": "65757898cf1j789ld",
+    "name": "Sandwich",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/sandwich.jpg",
+    "category" : "popular",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789md",
+    "name": "Pineapple",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+   "image" : "../src/assets/pineapp.jpg",
+    "category" : "fruit",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789wd",
+     "name": "Dessert",
+     "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+     "image" : "../src/assets/dessert.jpg",
+     "category" : "dessert",
+     "price" : 14.7
+   },
+{
+    "_id": "65757898cf1j789nd",
+    "name": "Sharry berry",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/sharry-berry.jpg",
+    "category" : "fruit",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789od",
+    "name": "Fried Egg",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+   "image" : "../src/assets/breakfast.jpg",
+    "category" : "popular",
+    "price" : 14.7
+  },
+{
+    "_id": "65757898cf1j789pd",
+    "name": "Coolberg drinks",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+   "image" : "../src/assets/coolberg-drinks.webp",
+    "category" :"drinks",
+    "price" : 14.7
+  },
+  {
+   "_id": "65757898cf1j789qd",
+    "name": "Orange",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+  "image" : "../src/assets/orange.jpg",
+    "category" : "fruit",
+    "price" : 14.7
+  },
+  {
+   "_id": "65757898cf1j789rd",
+    "name": "Bodega",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/bodega.jpg",
+    "category" : "popular",
+    "price" : 14.7
+  },
+ 
+  {
+   "_id": "65757898cf1j789cd",
+    "name": "Ogbono soup",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+   "image" : "../src/assets/ogbono1.png",
+    "category" : "soup",
+    "price" : 14.7
+  },
+  {
+   "_id": "65757898cf1j789de",
+    "name": "Broccoli",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/Broccoli-Cheddar.jpg",
+    "category" : "soup",
+    "price" : 14.7
+  },
+  {
+   "_id": "65757898cf1j789ef",
+    "name": "Beckred drinks",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+   "image" : "../src/assets/beckred-drinks.jpg",
+    "category" : "drinks",
+    "price" : 14.7
+  },
+  {
+   "_id": "65757898cf1j789fg",
+    "name": "Beckice drinks",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+   "image" : "../src/assets/beckice-drinks.jpg",
+    "category" : "drinks",
+    "price" : 14.7
+  },
+  {
+   "_id": "65757898cf1j789gh",
+    "name": "Red wine drinks",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/red-winedrinks.webp",
+    "category" : "drinks",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789wd",
+     "name": "Summer desserts",
+     "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/summer-desserts.jpg",
+     "category" : "dessert",
+     "price" : 14.7
+   },
+  {
+   "_id": "65757898cf1j789hi",
+    "name": "Malt drink",
+    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+    "image" : "../src/assets/maltdrink.jpg",
+    "category" : "drinks",
+    "price" : 14.7
+  },
+  {
+    "_id": "65757898cf1j789hi",
+     "name": "Claustheler drink",
+     "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
+     "image" : "../src/assets/claustheler-drinks.jpg",
+     "category" : "drinks",
+     "price" : 14.7
+   }
+]
