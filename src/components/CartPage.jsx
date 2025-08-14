@@ -21,7 +21,7 @@ const CartPage = () => {
   const handleDecrease = (item) => {
     if (item.quantity > 1) {
       // fetch(`http://localhost:3000/carts/${item._id}`, {
-        fetch(`https://foodie-backend-umhd.onrender.com//carts/${item._id}`, {
+        fetch(`https://foodie-backend-umhd.onrender.com/carts/${item._id}`, {
       // fetch(`${API_BASE_URL}/carts/${item._id}`, {
         method: "PUT",
         headers: {
