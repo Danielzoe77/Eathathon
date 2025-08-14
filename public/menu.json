@@ -1,11 +1,4 @@
-[{
-    "_id": "65757898cf1j789ad",
-    "name": "Afang",
-    "recipe": "chargrilled fresh tuna (served medium rare) on classic salad ",
-    "image" : "../src/assets/afang1.jpg",
-    "category" : "soup",
-    "price" : 14.7
-  },
+[
 {
     "_id": "65757898cf1j789bd",
     "name": "Egusi soup",

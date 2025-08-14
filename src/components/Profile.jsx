@@ -1,24 +1,28 @@
 import React, { useContext } from "react";
 import { AuthContent } from "../contexts/AuthProvider";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 const Profile = ({ user }) => {
-const {logOut} = useContext(AuthContent)
+  const { logOut, setUser } = useContext(AuthContent);
 const navigate = useNavigate();
 const location = useLocation();
 
+
 //logout functions
 const handleLogout = () => {
+ 
   logOut()
     .then(() => {
-      alert("Logged out successfully");
+      // <Navigate to="/menu" state={{from: location}} replace></Navigate>
+      // navigate('/menu', { state: { from: location }, replace: true })
       navigate(location.pathname, { replace: true });
-       // Update the user state to null
-       setUser(null);
+   //user
+   setUser(null)
+      
     })
     .catch((error) => {
-      console.error(error);
+     console.error(error);
     });
 };
   return (
@@ -54,13 +58,16 @@ const handleLogout = () => {
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             {/* Sidebar content here */}
             <li>
-              <a>Profile</a>
+              <a href="/update-profile">Profile</a>
             </li>
             <li>
-              <a>Order</a>
+              <a href="/order">Order</a>
             </li>
             <li>
               <a>Setting</a>
+            </li>
+            <li>
+              <Link to="/dashboard">Dashboard</Link> 
             </li>
             <li>
               <a onClick={handleLogout}>Logout</a>

@@ -5,6 +5,7 @@ import "../App.css";
 import Footer from "../components/Footer";
 import { AuthContent } from "../contexts/AuthProvider";
 import LoadingSpinner from "../components/LoadingSpinner";
+import Menu from "../../src/Pages/Shop/Menu";
 
 const Main = () => {
   //this is to show when the url is loading
@@ -17,7 +18,9 @@ const Main = () => {
       ) : (
         <div>
         <Navbar />
+        <div className="min-h-screen" >
         <Outlet />
+        </div>
         <Footer />
       </div>
       )}

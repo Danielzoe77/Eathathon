@@ -1,70 +1,131 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaGithub } from "react-icons/fa6";
-import { FaFacebookF } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle, FaFacebookF } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContent } from "../contexts/AuthProvider";
+import Swal from "sweetalert2";
+import useAuth from "../hooks/useAuth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
-const Modal = () => {
+const Modal = ({ isOpen, onClose }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
-  const { signUpwithGmail, login } = useContext(AuthContent);
+  const { signUpwithGmail, login } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const [errorMessage, setErrorMessage] = useState("");
 
-  //redirect to home page
   const location = useLocation();
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
-    const email = data.email;
-    const password = data.password;
-    //console.log(email,password)
+    const { email, password, name } = data;
+  
     login(email, password)
       .then((result) => {
-        const user = result.user;
-        alert("Login successful");
-
-        //this is to help redirect to the hpme page and because we are using modal close we had to include it here
-        document.getElementById("my_modal_5").close();
-        navigate(from, { replace: true });
+        const userInfo = {
+          name: name || result.user?.displayName || "Anonymous",
+          email: result.user?.email,
+        };
+  
+        // Send user info to backend
+        axiosPublic.post("/users/login", userInfo)
+          .then(() => {
+            Swal.fire({
+              title: "Success!",
+              text: "Login successful",
+              icon: "success",
+              timer: 2000,
+              showConfirmButton: false,
+            });
+            
+            onClose(); // Close the modal
+            reset();
+            navigate(from, { replace: true });
+           
+          })
+          .catch((error) => {
+            if (error.response?.data?.message === "User already exists") {
+              // User already exists, ignore the error
+              Swal.fire({
+                title: "Success!",
+                text: "welcome back",
+                icon: "success",
+                timer: 2000,
+                showConfirmButton: false,
+              })
+              onClose(); // Close the modal
+              reset();
+              navigate(from, { replace: true });
+            } else {
+              // Handle other errors (like server issues)
+              setErrorMessage("An error occurred. Please try again later.");
+            }
+          });
       })
       .catch((error) => {
-        const errorMessage = error.message;
-        setErrorMessage("Provide a correct email and password!");
+        setErrorMessage("Invalid email or password.");
       });
   };
+  
 
-  //google signin
   const handleLogin = () => {
     signUpwithGmail()
       .then((result) => {
-        const user = result.user;
-        alert("Login successfully");
+        const userInfo = {
+          name: result.user?.displayName|| "Anonymous",
+          email: result.user?.email,
+        };
 
-        //this is to help redirect to the hpme page and because we are using modal close we had to include it here
-        document.getElementById("my_modal_5").close();
-        navigate(from, { replace: true });
+        axiosPublic.post("/users/login", userInfo).then(() => {
+          Swal.fire({
+            title: "Success!",
+            text: "Signup successful",
+            icon: "success",
+            timer: 2000,
+            showConfirmButton: false,
+          });
+          // console.log("Closing modal...");
+          onClose();
+          reset();
+          navigate(from, { replace: true });
+          
+        });
       })
-      .catch((error) => console.log(error));
+         .catch((error) => {
+            if (error.response?.data?.message === "User already exists") {
+              // User already exists, ignore the error
+              Swal.fire({
+                title: "Success!",
+                text: "Login successful",
+                icon: "success",
+                timer: 2000,
+                showConfirmButton: false,
+              })
+              onClose(); // Close the modal
+              navigate(from, { replace: true });
+            } else {
+              // Handle other errors (like server issues)
+              setErrorMessage("An error occurred. Please try again later.");
+            }
+          });
   };
+
+  
+
   return (
-    <dialog id="my_modal_5" className="modal modal-middle sm:modal-middle">
+    <div className={`modal modal-middle sm:modal-middle ${isOpen ? "modal-open" : ""}`}>
+
       <div className="modal-box">
         <div className="modal-action flex flex-col justify-center mt-0">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="card-body"
-            method="dialog"
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <h3 className="font-bold text-lg">Please Login</h3>
 
-            {/* email */}
+            {/* Email */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -77,6 +138,8 @@ const Modal = () => {
                 {...register("email")}
               />
             </div>
+
+            {/* Password */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
@@ -85,6 +148,7 @@ const Modal = () => {
                 type="password"
                 placeholder="password"
                 className="input input-bordered"
+                required
                 {...register("password")}
               />
               <label className="label mt-1">
@@ -94,15 +158,12 @@ const Modal = () => {
               </label>
             </div>
 
-            {/* error text */}
-
-            {errorMessage ? (
-              <p className="text-red text-xs itallic">{errorMessage}</p>
-            ) : (
-              ""
+            {/* Error Message */}
+            {errorMessage && (
+              <p className="text-red-500 text-xs italic mt-2">{errorMessage}</p>
             )}
 
-            {/* login button */}
+            {/* Submit Button */}
             <div className="form-control mt-6">
               <input
                 type="submit"
@@ -110,22 +171,25 @@ const Modal = () => {
                 className="btn bg-green text-white"
               />
             </div>
+
+            {/* Redirect to Signup */}
             <p className="my-2 text-center">
-              Do not have an account?{" "}
+              Don't have an account?{" "}
               <Link to="/signup" className="underline ml-1 text-red">
-                {" "}
                 Sign up
               </Link>
             </p>
+
+            {/* Close Button */}
             <button
-              htmLfor="my_modal_5"
-              onClick={() => document.getElementById("my_modal_5").close()}
+              onClick={onClose}
               className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
             >
               ✕
             </button>
           </form>
 
+          {/* Social Logins */}
           <div className="text-center mb-2 space-x-3">
             <button
               className="btn btn-circle hover:bg-green hover:text-white"
@@ -142,7 +206,7 @@ const Modal = () => {
           </div>
         </div>
       </div>
-    </dialog>
+    </div>
   );
 };
 

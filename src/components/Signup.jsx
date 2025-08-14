@@ -4,20 +4,25 @@ import { FaGithub } from "react-icons/fa6";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "./Modal";
+import Login from "./Login";
 import { AuthContent } from "../contexts/AuthProvider";
+import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Signup = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm(); //when u use useForm() it returns an object and we destructure it(data)
 
-  const { creatUser, signUpwithGmail, login } = useContext(AuthContent);
+  const { creatUser, signUpwithGmail, updateUserProfile } =
+    useContext(AuthContent);
+  const axiosPublic = useAxiosPublic();
 
   //redirect to home page
   const location = useLocation();
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
@@ -26,27 +31,66 @@ const Signup = () => {
     // console.log(data);
     creatUser(email, password)
       .then((result) => {
+        // Signed in
         const user = result.user;
-        alert("signup successful");
-        //this is to help redirect to the hpme page and because we are using modal close we had to include it here
-        document.getElementById("my_modal_5").close();
-        navigate(from, { replace: true });
+        //once a user is created we need to log them in and immediately their profile is updated
+        updateUserProfile(data.name, data.photoURL).then(() => {
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          //the below code is to help get user details and stores/post it in the database using this route
+          axiosPublic
+            .post("/users", userInfo)
+            .then((res) => {
+              //console.log(res.data);
+              alert("signup dbn");
+              document.getElementById("my_modal_5").close();
+              //this is to help redirect to the hpme page and because we are using modal close we had to include it here
+              navigate(from, { replace: true });
+            })
+            .catch((error) => {
+              const errorCode = error.code;
+              const errorMessage = error.message;
+            });
+        });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
   };
+
   //google signin
   const handleLogin = () => {
     signUpwithGmail()
       .then((result) => {
         const user = result.user;
-        alert("signup successfully");
+        // console.log(user);
+        const userInfo = {
+          //this is to check if result then user then get display name
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+        };
+        //the below code is to help get user details and stores/post it in the database using this route
+        axiosPublic
+          .post("/users", userInfo)
+          .then((res) => {
+            // console.log(res.data);
+            alert("signup successful");
+            document.getElementById("my_modal_5").close();
+            //this is to help redirect to the hpme page and because we are using modal close we had to include it here
+            navigate(from, { replace: true });
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          });
+        // alert("signup successfully");
 
-        //this is to help redirect to the hpme page and because we are using modal close we had to include it here
-        document.getElementById("my_modal_5").close();
-        navigate(from, { replace: true });
+        // //this is to help redirect to the hpme page and because we are using modal close we had to include it here
+        // document.getElementById("my_modal_5").close();
+        // navigate(from, { replace: true });
       })
       .catch((error) => console.log(error));
   };
@@ -59,6 +103,19 @@ const Signup = () => {
           method="dialog"
         >
           <h3 className="font-bold text-lg">Create Account</h3>
+          {/* Name */}
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              type="text"
+              placeholder="name"
+              className="input input-bordered"
+              required
+              {...register("name")}
+            />
+          </div>
 
           {/* email */}
           <div className="form-control">
@@ -102,13 +159,9 @@ const Signup = () => {
           </div>
           <p className="my-2 text-center">
             Already have an Account{" "}
-            <button
-              onClick={() => document.getElementById("my_modal_5").showModal()}
-              className="underline ml-1 text-red"
-            >
-              {" "}
+            <Link to="/login" className="underline ml-1 text-red">
               Login
-            </button>
+            </Link>
           </p>
           <Link
             to="/"

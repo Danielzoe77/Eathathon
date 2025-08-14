@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Card from "../../components/Card";
 import { FaFilter } from "react-icons/fa6";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Menu = () => {
   const [menu, setMenu] = useState([]);
@@ -15,7 +16,9 @@ const Menu = () => {
     //fetch data
     const fetchData = async () => {
       try {
-        const response = await fetch("/menu.json");
+        // const response = await fetch("http://localhost:3000/menu");
+        const response = await fetch("https://foodie-backend-umhd.onrender.com/menu");
+        // const response = await fetch(`${API_BASE_URL}/menu`);
         const data = await response.json();
         // console.log(data);
         setMenu(data);
@@ -189,29 +192,32 @@ const Menu = () => {
 
         {/* product cards */}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-4">
-          {currentItems.map((item) => (
-            <Card key={item.id} item={item} />
-          ))}
+        <div className="px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {currentItems.map((item) => (
+              <Card key={item.id} item={item} />
+            ))}
+          </div>
         </div>
       </div>
 
-     {/* pagination section */}
+      {/* pagination section */}
 
-          <div className="flex justify-center my-8">
-            {
-              Array.from({length : Math.ceil(filteredItems.length / itemsPerPage)}).map((_, index) =>(
-                <button
-                key={index + 1} 
-                onClick={() => paginate(index + 1)}
-                className={`mx-1 px-3 py-1 rounded-full ${currentPage === index + 1 ? "bg-green text-white" : "bg-gray-200"}`}
-                >
-                      {index + 1}
-                </button>
-              ))
-            }
-          </div>
-
+      <div className="flex justify-center my-8">
+        {Array.from({
+          length: Math.ceil(filteredItems.length / itemsPerPage),
+        }).map((_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => paginate(index + 1)}
+            className={`mx-1 px-3 py-1 rounded-full ${
+              currentPage === index + 1 ? "bg-green text-white" : "bg-gray-200"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

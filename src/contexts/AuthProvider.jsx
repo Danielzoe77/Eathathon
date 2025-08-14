@@ -10,7 +10,9 @@ import {
   signOut
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
-
+//axios
+import axios from "axios";
+// import { data } from "autoprefixer";
 
 export const AuthContent = createContext();
 const auth = getAuth(app);
@@ -52,16 +54,29 @@ const updateUserProfile =({name, photoURL})=>{
 
 
 //check signed in user and this is also helps to logout the user and returns to the home page with login
+//all this are gotten using the unsuscribe function and axios is used a post request thru the /jwt route
+//to get the token
 
 useEffect(()=>{
- const unsuscribed = onAuthStateChanged(auth, (currentUser) => {
+ const unsuscribed = onAuthStateChanged(auth, currentUser => {
+        setUser(currentUser);
         if (currentUser) {
-        setUser(currentUser)
-        setLoading(false)
-        } else {
-          setUser(null);
-          setLoading(false);
+        const userInfo = {
+          name:currentUser.displayName,
+          email:currentUser.email
         }
+        axios.post('https://foodie-backend-umhd.onrender.com/jwt', userInfo)
+        // axios.post(`${API_BASE_URL}/jwt`, userInfo)
+        .then((response) => {
+          if(response.data.token){
+            localStorage.setItem('Access-token', response.data.token)
+            
+          }  
+        })  
+        } else{
+          localStorage.removeItem('Access-token')
+        }
+        setLoading(false)
       });
       return () =>{
          return unsuscribed()

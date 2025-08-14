@@ -1,20 +1,23 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FaUserAlt } from "react-icons/fa";
-
 import logo from "../assets/food.png";
 import { MdOutlineWifiCalling3 } from "react-icons/md";
 import Modal from "./Modal";
-import { AuthContent } from "../contexts/AuthProvider";
 import Profile from "./Profile";
+import { Link } from "react-router-dom";
+import useCarts from "../hooks/useCarts";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
+  const { user } = useAuth();
 
-  const { user } = useContext(AuthContent);
-  console.log(user);
+  const [cart, refetch] = useCarts();
 
-  //handle scroll function
+  // Modal visibility state
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // handle scroll function
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
@@ -27,12 +30,13 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   const navItems = (
     <>
       <li>
-        <a href="/">Home </a>
+        <a href="/">Home</a>
       </li>
       <li>
         <details>
@@ -71,12 +75,19 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const handleLoginClick = () => {
+    setIsModalOpen(true);  // Show the modal when the login button is clicked
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);  // Close the modal when needed
+  };
+
   return (
-    <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out ">
+    <header className="max-w-screen-2xl container mx-auto fixed top-0 left-0 right-0 transition-all duration-300 ease-in-out">
       <div
-        className={`navbar xl:px-24 ${
-          isSticky ? "shadow-md bg-base-100 transition-all duration-300" : ""
-        }`}
+        className={`navbar xl:px-24 ${isSticky ? "shadow-md bg-base-100 transition-all duration-300" : ""}`}
       >
         <div className="navbar-start">
           <div className="dropdown">
@@ -128,46 +139,52 @@ const Navbar = () => {
               />
             </svg>
           </button>
-          <div className="flex-none">
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost lg:flex hidden btn-circle mr-3 "
-              >
-                <div className="indicator">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                    />
-                  </svg>
-                  <span className="badge badge-sm indicator-item">8</span>
+
+          {/* Cart item */}
+          <Link to="cart-page">
+            <div className="flex-none">
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost lg:flex hidden btn-circle mr-3"
+                >
+                  <div className="indicator">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>
+                    <span className="badge badge-sm indicator-item">{cart.length || 0}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
 
-          {/* LOGIN BUTTON */}
+          {/* Login Button */}
           {user ? (
             <Profile user={user} />
           ) : (
             <button
-              onClick={() => document.getElementById("my_modal_5").showModal()}
+              onClick={handleLoginClick}
               className="btn bg-green rounded-full px-6 text-white items-center gap-2"
             >
               <FaUserAlt /> Login
             </button>
           )}
-          <Modal />
+
+          {/* Pass modal state as props */}
+          <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
         </div>
       </div>
     </header>
