@@ -164,6 +164,12 @@ const Menu = () => {
             >
               Drinks
             </button>
+             <button
+              onClick={() => filterItems("fruits")}
+              className={selectedCategory === "fruits" ? "active" : ""}
+            >
+              Fruits
+            </button>
           </div>
 
           {/* sorting and filter */}

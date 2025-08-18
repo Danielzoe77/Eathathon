@@ -94,6 +94,7 @@ const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`
                   <option value="dessert">Dessert</option>
                   <option value="drinks">Drinks</option>
                   <option value="popular">Popular</option>
+                  <option value="fruits">Fruits</option>
                 </select>
               </fieldset>
             </div>
