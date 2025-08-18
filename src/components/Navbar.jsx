@@ -11,6 +11,7 @@ import useAuth from "../hooks/useAuth";
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const { user } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [cart, refetch] = useCarts();
 
@@ -43,8 +44,14 @@ const Navbar = () => {
           <summary>Menu</summary>
           <ul className="p-2">
             <li>
-              <a href="/menu">All</a>
+              {/* <a href="/menu">All</a> */}
+                 <Link to="/menu">
+                     All
+                  </Link>
+
             </li>
+
+         
             <li>
               <a>Salad</a>
             </li>
@@ -91,7 +98,11 @@ const Navbar = () => {
       >
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            {/* <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden"> */}
+            <button
+    onClick={() => setMenuOpen(!menuOpen)}
+    className="btn btn-ghost lg:hidden"
+  >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -106,13 +117,16 @@ const Navbar = () => {
                   d="M4 6h16M4 12h8m-8 6h16"
                 />
               </svg>
-            </div>
+              </button>
+           
+             {menuOpen && (
             <ul
-              tabIndex={0}
+              tabIndex={1}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {navItems}
             </ul>
+          )}
           </div>
           <a href="/">
             <img src={logo} alt="" className="w-20 h-20" />
@@ -123,7 +137,7 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end">
-          <button className="btn btn-ghost btn-circle hidden lg:flex">
+          <button className="btn btn-ghost btn-circle inline-flex lg:w-10 w-8 lg:h-10 h-8 lg:flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -147,7 +161,7 @@ const Navbar = () => {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="btn btn-ghost lg:flex hidden btn-circle mr-3"
+                  className="btn btn-ghost lg:flex inline-flex lg:w-10 w-8 lg:h-10 h-8 btn-circle mr-3"
                 >
                   <div className="indicator">
                     <svg

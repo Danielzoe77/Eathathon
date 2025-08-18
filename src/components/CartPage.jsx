@@ -21,8 +21,8 @@ const CartPage = () => {
   const handleDecrease = (item) => {
     if (item.quantity > 1) {
       // fetch(`http://localhost:3000/carts/${item._id}`, {
-        fetch(`https://foodie-backend-umhd.onrender.com/carts/${item._id}`, {
-      // fetch(`${API_BASE_URL}/carts/${item._id}`, {
+      fetch(`https://foodie-backend-umhd.onrender.com/carts/${item._id}`, {
+        // fetch(`${API_BASE_URL}/carts/${item._id}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",
@@ -46,8 +46,8 @@ const CartPage = () => {
   //handle increase function
   const handleIncrease = (item) => {
     // fetch(`http://localhost:3000/carts/${item._id}`, {
-     fetch(`https://foodie-backend-umhd.onrender.com/carts/${item._id}`, {
-    // fetch(`${API_BASE_URL}/carts/${item._id}`, {
+    fetch(`https://foodie-backend-umhd.onrender.com/carts/${item._id}`, {
+      // fetch(`${API_BASE_URL}/carts/${item._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -69,7 +69,7 @@ const CartPage = () => {
     return total + calculateTotal(item);
   }, 0);
   const orderTotal = calculateTotalAmount;
-console.log(orderTotal)
+  console.log(orderTotal);
 
   //handle delete
   const handleDelete = (item) => {
@@ -83,10 +83,12 @@ console.log(orderTotal)
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // fetch(`http://localhost:3000/carts/${item._id}`, 
-          fetch(`https://foodie-backend-umhd.onrender.com/carts/${item._id}`, 
-        // fetch(`${API_BASE_URL}/carts/${item._id}`,
-          { method: "DELETE" })
+        // fetch(`http://localhost:3000/carts/${item._id}`,
+        fetch(
+          `https://foodie-backend-umhd.onrender.com/carts/${item._id}`,
+          // fetch(`${API_BASE_URL}/carts/${item._id}`,
+          { method: "DELETE" }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.n > 0) {
@@ -241,14 +243,3 @@ console.log(orderTotal)
 
 export default CartPage;
 
-{
-  /* <div className="">
-          
-          <p className="font-medium my-8 text-center">
-            Cart is empty please add products
-          </p>
-
-          <button className="btn bg-green text-center text-white">Back To Menu</button>
-         
-        </div> */
-}

@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 import useCarts from "../hooks/useCarts";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-
 const Card = ({ item }) => {
   const { name, image, price, recipe, _id } = item;
   const [isHeartFilled, setIsHeartFilled] = useState(false);
@@ -89,8 +88,8 @@ const Card = ({ item }) => {
       };
       // console.log(cartItem)
       // fetch("http://localhost:3000/carts", {
-       fetch("https://foodie-backend-umhd.onrender.com/carts", {
-      // fetch(`${API_BASE_URL}/carts`, {
+      fetch("https://foodie-backend-umhd.onrender.com/carts", {
+        // fetch(`${API_BASE_URL}/carts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -102,7 +101,7 @@ const Card = ({ item }) => {
           console.log(data);
 
           // Update the UI by calling refetch
-         // refetch();
+          // refetch();
           //sweetAlert plugins
           if (data._id) {
             Swal.fire({
@@ -113,16 +112,16 @@ const Card = ({ item }) => {
               timer: 2000,
             });
           }
-          refetch()
+          refetch();
         })
-        
+
         .catch((error) => {
-          if (error.response.status === 400){
+          if (error.response.status === 400) {
             Swal.fire({
               icon: "error",
               title: "Oops...",
               text: "Something went wrong!",
-              footer: '<a href="#">Why do I have this issue?</a>'
+              footer: '<a href="#">Why do I have this issue?</a>',
             });
           }
         });
@@ -151,7 +150,6 @@ const Card = ({ item }) => {
   return (
     // <div className="card bg-base-100 w-full shadow-xl relative">
     <div className="card bg-base-100 shadow-xl w-full max-w-sm mx-auto">
-
       <div
         className={`rating gap-1 absolute top-2 right-2 p-4 heartStar bg-green ${
           isHeartFilled ? "text-rose-500" : "text-white"
@@ -165,8 +163,8 @@ const Card = ({ item }) => {
         <figure>
           <img
             src={item.image}
-            alt="Shoes"
-            className="hover:scale-105 transition-all duration-200 md:h-72"
+            alt={item.name}
+            className="w-full h-48 md:h-72 object-cover hover:scale-105 transition-all duration-200 rounded-md"
           />
         </figure>
       </Link>

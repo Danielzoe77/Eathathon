@@ -34,11 +34,10 @@ const router = createBrowserRouter([
         },
         {
           path: "/menu",
-          element: ( 
+          element: 
            
               <Menu />
           
-          ),
         },
         {
           path : "/update-profile",
