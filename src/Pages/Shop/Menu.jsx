@@ -16,8 +16,8 @@ const Menu = () => {
     //fetch data
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/menu");
-        // const response = await fetch("https://foodie-backend-umhd.onrender.com/menu");
+        // const response = await fetch("http://localhost:3000/menu");
+        const response = await fetch("https://foodie-backend-umhd.onrender.com/menu");
         // const response = await fetch(`${API_BASE_URL}/menu`);
         const data = await response.json();
         // console.log(data);
