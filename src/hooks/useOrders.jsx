@@ -15,7 +15,8 @@ const useOrders = () => {
       //at the backend we use the get method to fetch the data which is the payment details via the individual email that was logged in
       //so we did the security by sending headers which has the token
       // const res = await fetch(`http://localhost:3000/payments/admin`, {
-      const res = await fetch(`${API_BASE_URL}/payments/admin`, {
+        const res = await fetch(`https://foodie-backend-umhd.onrender.com/payments/admin`, {
+      // const res = await fetch(`${API_BASE_URL}/payments/admin`, {
         headers: {
           authorization: `Bearer ${token}`,
         },
