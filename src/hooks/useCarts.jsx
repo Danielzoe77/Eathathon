@@ -13,8 +13,8 @@ const useCarts = () => {
         queryKey: ['carts', user?.email],
         queryFn: async () => {
             //securing this route for unauthorized user by sending headers which has the token
-            const res = await fetch(`http://localhost:3000/carts?email=${user?.email }`,{
-            //  const res = await fetch(`https://foodie-backend-umhd.onrender.com/carts?email=${user?.email }`,{
+            // const res = await fetch(`http://localhost:3000/carts?email=${user?.email }`,{
+             const res = await fetch(`https://foodie-backend-umhd.onrender.com/carts?email=${user?.email }`,{
             // const res = await fetch(`${API_BASE_URL}/carts?email=${user?.email }`,{      
                 headers:{
                     authorization:`Bearer ${token}`
