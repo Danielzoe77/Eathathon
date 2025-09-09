@@ -34,12 +34,14 @@ const SpecialDishes = () => {
   const slider = React.useRef(null)
 
   useEffect(() =>{
-        fetch("/menu.json").then(res =>res.json()).then(data =>{
+        fetch("https://foodie-backend-umhd.onrender.com/menu").then(res =>res.json()).then(data =>{
           // console.log(data)
           // filter the data that will be displayed
           const specials = data.filter((product) =>
             product.category === "popular"
           )
+          // const specials = data; // all products
+          
           // console.log(specials)
           setRecipe(specials)
         }); 

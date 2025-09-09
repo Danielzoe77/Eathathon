@@ -40,15 +40,29 @@ const Signup = () => {
             email: data.email,
           };
           //the below code is to help get user details and stores/post it in the database using this route
-          axiosPublic
-            .post("/users", userInfo)
-            .then((res) => {
-              //console.log(res.data);
-              alert("signup dbn");
-              document.getElementById("my_modal_5").close();
-              //this is to help redirect to the hpme page and because we are using modal close we had to include it here
-              navigate(from, { replace: true });
-            })
+          // axiosPublic
+          //   .post("/users", userInfo)
+            // .then((res) => {
+            //   //console.log(res.data);
+            //   alert("signup dbn");
+            //   document.getElementById("my_modal_5").close();
+            //   //this is to help redirect to the hpme page and because we are using modal close we had to include it here
+            //   navigate(from, { replace: true });
+            // })
+              axiosPublic.post("/users", userInfo)
+                      .then(() => {
+                        Swal.fire({
+                          title: "Success!",
+                          text: "Login successful",
+                          icon: "success",
+                          timer: 2000,
+                          showConfirmButton: false,
+                        });
+                        
+                        onClose(); // Close the modal
+                        reset();
+                        navigate(from, { replace: true });
+                      })
             .catch((error) => {
               const errorCode = error.code;
               const errorMessage = error.message;

@@ -43,7 +43,7 @@ const Login = () => {
           .post("/users", userInfo)
           .then((res) => {
             // console.log(res.data);
-            alert("signup successful");
+            // alert("signup successful");
             // document.getElementById("my_modal_5").close();
             //this is to help redirect to the hpme page and because we are using modal close we had to include it here
             navigate(from, { replace: true });
