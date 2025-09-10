@@ -102,13 +102,25 @@ const SpecialDishes = () => {
         </div>
 
 
-        <Slider ref={slider} {...settings} className='overflow-hidden mt-10'>
+        {/* <Slider ref={slider} {...settings} className='overflow-hidden mt-10'>
         {
+
+          
           recipe.map((item,i)=>(
-            <Card key={i} item={item} />
+            <Card key={i}  item={item} />
           ))
         }
-      </Slider>
+     
+      </Slider> */}
+    <Slider ref={slider} {...settings} className="overflow-hidden mt-10">
+  {recipe.map((item, i) => (
+    <div key={i} className="px-3">   {/* <-- add horizontal padding */}
+      <Card item={item} />
+    </div>
+  ))}
+</Slider>
+
+      
     </div>
   )
 }
