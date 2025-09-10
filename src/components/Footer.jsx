@@ -12,7 +12,7 @@ const Footer = () => {
     </p>
   </aside>
   <nav>
-    <h6 className="footer-title">USEFUL LINKS</h6>
+    <h6 className="footer-title text-white">USEFUL LINKS</h6>
     <a className="link link-hover">About us</a> 
     <a className="link link-hover">Events</a>
     <a className="link link-hover">Blogs</a>
